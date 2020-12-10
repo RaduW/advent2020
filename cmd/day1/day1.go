@@ -1,10 +1,8 @@
 package main
 
 import (
-	"bufio"
+	"advent2020/cmd/internal/util"
 	"fmt"
-	"os"
-	"path/filepath"
 	"strconv"
 )
 
@@ -52,30 +50,20 @@ func findExpenseTriple(expenses []int64) (int64, int64, int64) {
 
 func getExpenses() (retVal []int64) {
 	retVal = make([]int64, 0, 100)
-	var absPath, err = filepath.Abs("expenses.txt")
-	if err != nil {
-		return
-	}
-	var file *os.File
-	file, err = os.Open(absPath)
-	defer func() {
-		if file != nil {
-			file.Close()
-		}
-	}()
+
+	var lines, err = util.GetLines("expenses.txt")
 
 	if err != nil {
 		return
 	}
-	var scanner = bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	for scanner.Scan() {
+	for _, line := range lines {
 		var val int64
-		val, _ = strconv.ParseInt(scanner.Text(), 10, 64)
+		val, _ = strconv.ParseInt(line, 10, 64)
 		if val != 0 {
 			retVal = append(retVal, val)
 		}
+
 	}
+
 	return
 }

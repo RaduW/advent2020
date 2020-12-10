@@ -1,1 +1,7 @@
-package day2
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("hello")
+}
