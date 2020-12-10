@@ -9,58 +9,12 @@ import (
 )
 
 func main() {
-	var x string
-	var err error
-	x, err = os.Executable()
-	if err == nil {
-		fmt.Printf("The executable is %v.\n", x)
-	} else {
-		fmt.Printf("we have an error %v.\n", err)
-	}
-	x, err = os.Getwd()
-	if err == nil {
-		fmt.Printf("The working directory is %v.\n", x)
-	} else {
-		fmt.Printf("we have an error %v.\n", err)
-	}
-	fmt.Printf("hello")
-
 	var expenses = getExpenses()
 	var v1, v2 = findExpensePair(expenses)
 	fmt.Printf("v1=%d v2=%d v1+v2=%d v1*v2=%d\n", v1, v2, v1+v2, v1*v2)
 	var v3 int64
 	v1, v2, v3 = findExpenseTriple(expenses)
 	fmt.Printf("v1=%d v2=%d v3, v1+v2+v3=%d v1*v2*v3=%d\n", v1, v2, v1+v2+v3, v1*v2*v3)
-}
-
-func printExpenses(expenses []int64) {
-	for _, expense := range expenses {
-		fmt.Printf("->%d<-\n", expense)
-	}
-}
-
-func getLines(fileName string) error {
-	var absPath, err = filepath.Abs(fileName)
-	if err != nil {
-		return err
-	}
-	var file *os.File
-	file, err = os.Open(absPath)
-	defer file.Close()
-
-	if err != nil {
-		fmt.Println("\nCould not open file:", absPath)
-		return err
-	}
-
-	var scanner = bufio.NewScanner(file)
-	scanner.Split(bufio.ScanLines)
-
-	for scanner.Scan() {
-		fmt.Println(scanner.Text())
-	}
-
-	return nil
 }
 
 func findExpensePair(expenses []int64) (int64, int64) {
@@ -104,7 +58,11 @@ func getExpenses() (retVal []int64) {
 	}
 	var file *os.File
 	file, err = os.Open(absPath)
-	defer file.Close()
+	defer func() {
+		if file != nil {
+			file.Close()
+		}
+	}()
 
 	if err != nil {
 		return
