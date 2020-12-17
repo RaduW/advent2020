@@ -1,7 +1,7 @@
 package main
 
 import (
-	"advent2020/cmd/internal/util"
+	"advent2020/internal/util"
 	"fmt"
 	"strconv"
 )
