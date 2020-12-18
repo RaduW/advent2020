@@ -30,7 +30,9 @@ func main() {
 	}
 
 	var validPasswords = 0
-	var invalidPasswords = 1
+	var invalidPasswords = 0
+	var validPasswords2 = 0
+	var invalidPasswords2 = 0
 	var totalPasswords = len(passwords)
 	for _, passwd := range passwords {
 		var matchInfo, _ = getPasswordInfo(passwdPolicy.FindStringSubmatch(passwd))
@@ -44,10 +46,19 @@ func main() {
 			invalidPasswords += 1
 		}
 		fmt.Println("passwd: ", passwd, " ", matchStr)
-
+		matches = validatePasswordInfo2(matchInfo)
+		if matches {
+			matchStr = "matches"
+			validPasswords2 += 1
+		} else {
+			matchStr = "does NOT match"
+			invalidPasswords2 += 1
+		}
+		fmt.Println("Second policy passwd: ", passwd, " ", matchStr)
 	}
 
-	fmt.Printf("\nFro %d passwords %d match and %d don't \n", totalPasswords, validPasswords, invalidPasswords)
+	fmt.Printf("\nFrom %d passwords %d match and %d don't \n", totalPasswords, validPasswords, invalidPasswords)
+	fmt.Printf("\nFrom %d passwords %d on second policy match and %d don't \n", totalPasswords, validPasswords2, invalidPasswords2)
 
 }
 
@@ -59,6 +70,21 @@ func validatePasswordInfo(info *passwordInfo) bool {
 		}
 	}
 	return cnt >= info.min && cnt <= info.max
+}
+
+func validatePasswordInfo2(info *passwordInfo) bool {
+	var matches uint64 = 0
+	var min = int(info.min) - 1
+	var max = int(info.max) - 1
+	for idx, char := range info.passwd {
+		if (idx == min || idx == max) && char == info.sign {
+			matches += 1
+		}
+		if idx == max {
+			break
+		}
+	}
+	return matches == 1
 }
 
 func getPasswordInfo(parsedLine []string) (*passwordInfo, error) {
