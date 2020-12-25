@@ -51,7 +51,7 @@ func findExpenseTriple(expenses []int64) (int64, int64, int64) {
 func getExpenses() (retVal []int64) {
 	retVal = make([]int64, 0, 100)
 
-	var lines, err = util.GetLines("expenses.txt")
+	var lines, err = util.GetLines("day1", "expenses.txt")
 
 	if err != nil {
 		return

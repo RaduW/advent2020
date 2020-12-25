@@ -10,7 +10,7 @@ import (
 
 func main() {
 	fmt.Println("hello day 5 ")
-	var lines, _ = util.GetLines("boardingTickets.txt")
+	var lines, _ = util.GetLines("day5", "boardingTickets.txt")
 	var maxSeatId = 0
 	var rowCols = make([]*rowCol, 0, len(lines))
 	for _, line := range lines {

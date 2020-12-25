@@ -10,7 +10,7 @@ import (
 
 func main() {
 	fmt.Println("Hello from day 8")
-	var program, err = util.GetLines("boot.txt")
+	var program, err = util.GetLines("day8", "boot.txt")
 
 	if err != nil {
 		fmt.Println(err)

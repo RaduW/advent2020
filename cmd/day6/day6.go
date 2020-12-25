@@ -12,7 +12,7 @@ type answerGroup struct {
 }
 
 func main() {
-	var lines, _ = util.GetLines("questions.txt")
+	var lines, _ = util.GetLines("day6", "questions.txt")
 
 	var answerGroups = toAnswerGroups(lines)
 	var uniqueAnswersPerGroup = 0

@@ -7,7 +7,7 @@ import (
 
 func main() {
 	fmt.Println("hello day 3 ")
-	var lines, err = util.GetLines("treeMap.txt")
+	var lines, err = util.GetLines("day3", "treeMap.txt")
 	if err != nil {
 		fmt.Println("An error occurred while reading treeMap.txt", err)
 	}

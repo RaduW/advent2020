@@ -11,7 +11,7 @@ import (
 
 func main() {
 	fmt.Println("hello day 7 ")
-	var lines, _ = util.GetLines("bagRules.txt")
+	var lines, _ = util.GetLines("day7", "bagRules.txt")
 	var allBags, _ = getAllBags(lines)
 	for col, bag := range allBags {
 		fmt.Printf("\n%v=>%v", col, bag)

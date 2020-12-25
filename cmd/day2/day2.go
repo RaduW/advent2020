@@ -17,7 +17,7 @@ type passwordInfo struct {
 
 func main() {
 	fmt.Println("hello")
-	var passwords, err = util.GetLines("passwords.txt")
+	var passwords, err = util.GetLines("day2", "passwords.txt")
 	if err != nil {
 		fmt.Println("Error importing passwords")
 		return

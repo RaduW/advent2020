@@ -7,7 +7,8 @@ import (
 	"path/filepath"
 )
 
-func GetLines(fileName string) ([]string, error) {
+func GetLines(cmd string, fileName string) ([]string, error) {
+	fileName = fmt.Sprintf("cmd/%s/%s", cmd, fileName)
 	var absPath, err = filepath.Abs(fileName)
 	if err != nil {
 		return nil, err

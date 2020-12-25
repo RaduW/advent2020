@@ -16,7 +16,7 @@ func main() {
 	fmt.Println(rawProps)
 	rawProps = getLineProperties(re, "  fasdf:a   ")
 	fmt.Println("->", rawProps, "<-")
-	var lines, _ = util.GetLines("passports.txt")
+	var lines, _ = util.GetLines("day4", "passports.txt")
 	var passports = parsePassports(lines)
 	var numPass, validPass, invalidPass, superValid, superInvalid int
 	numPass = len(passports)
